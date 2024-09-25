@@ -1,3 +1,4 @@
+
 import { DashboardClient } from "./dashboard-client/page"
 
 async function getData() {
