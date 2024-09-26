@@ -1,8 +1,39 @@
-
+// Import your client component
 import { DashboardClient } from "./dashboard-client/page"
 
-async function getData() {
-  // In a real application, this would be an API call
+// Define the TypeScript types for the data
+interface Platform {
+  id: string;
+  name: string;
+  subscriptions: number;
+  revenue: number;
+  apiUsage: number;
+  tier: string;
+}
+
+interface SubscriptionTrend {
+  date: string;
+  count: number;
+}
+
+interface Notification {
+  id: number;
+  message: string;
+  type: string;
+}
+
+interface DashboardData {
+  totalPlatforms: number;
+  totalSubscriptions: number;
+  totalRevenue: number;
+  adminRevenue: number;
+  platforms: Platform[];
+  subscriptionTrend: SubscriptionTrend[];
+  notifications: Notification[];
+}
+
+
+async function getData(): Promise<DashboardData> {
   return {
     totalPlatforms: 42,
     totalSubscriptions: 1837,
@@ -26,11 +57,25 @@ async function getData() {
       { id: 2, message: 'Significant revenue increase for GamersUnite', type: 'info' },
       { id: 3, message: 'API key expired for EduPortal', type: 'error' },
     ]
-  }
+  };
 }
 
-export default async function AdminDashboardPage() {
-  const data = await getData()
-  
+interface AdminDashboardPageProps {
+  data: DashboardData; 
+}
+
+export default function AdminDashboardPage({ data }: AdminDashboardPageProps) {
+  // Pass the fetched data as props to DashboardClient
   return <DashboardClient initialData={data} />
+}
+
+export async function getStaticProps() {
+  const data: DashboardData = await getData(); 
+  
+  return {
+    props: {
+      data, 
+    },
+    revalidate: 10, 
+  };
 }

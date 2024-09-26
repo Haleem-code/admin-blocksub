@@ -1,4 +1,4 @@
-  'use client'
+"use client";
 
   import React, { useState } from 'react'
   import { BarChart3, Users, CreditCard, DollarSign, Bell, Activity, Menu } from 'lucide-react'
