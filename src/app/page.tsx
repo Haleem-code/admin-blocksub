@@ -32,7 +32,7 @@ interface DashboardData {
   notifications: Notification[];
 }
 
-
+// Static data fetching function
 async function getData(): Promise<DashboardData> {
   return {
     totalPlatforms: 42,
@@ -60,22 +60,11 @@ async function getData(): Promise<DashboardData> {
   };
 }
 
-interface AdminDashboardPageProps {
-  data: DashboardData; 
-}
+// Ensure the page is treated as static
+export const dynamic = 'force-static';
 
-export default function AdminDashboardPage({ data }: AdminDashboardPageProps) {
-  // Pass the fetched data as props to DashboardClient
-  return <DashboardClient initialData={data} />
-}
-
-export async function getStaticProps() {
-  const data: DashboardData = await getData(); 
+export default async function AdminDashboardPage() {
+  const data = await getData(); // Fetch data once statically during the build
   
-  return {
-    props: {
-      data, 
-    },
-    revalidate: 10, 
-  };
+  return <DashboardClient initialData={data} />;
 }
