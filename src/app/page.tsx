@@ -1,6 +1,5 @@
 // Import your client component
-import { DashboardClient } from "../app/dashboard/page";
-
+import { DashboardClient } from '@/components/dashboard'
 // Define the TypeScript types for the data
 interface Platform {
   id: string;
