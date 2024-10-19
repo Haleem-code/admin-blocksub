@@ -55,7 +55,7 @@ Provide read-only access to certain dashboards for specific users.
 
 
 
-6. Reports and Exports:
+5. Reports and Exports:
 
 Generate detailed reports for revenue, platform usage, and SDK performance.
 
